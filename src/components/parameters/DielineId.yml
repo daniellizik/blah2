@@ -1,0 +1,15 @@
+DielineId:
+  name: dieline_id
+  in: path
+  required: true
+  description: The id of the dieline
+  schema:
+    type: string
+
+DielineVersion:
+  name: dieline_version
+  in: query
+  requried: false
+  description: The version of the dieline. If ommited, the current version is returned.
+  schema:
+    type: string

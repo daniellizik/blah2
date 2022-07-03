@@ -1,0 +1,26 @@
+DielineSearchName:
+  name: name
+  in: query
+  required: false
+  description: Search dielines by name.
+  schema:
+    type: string
+
+DielineSearchShapeCount:
+  name: shape_count
+  in: query
+  requried: false
+  description: Search dielines by the occurances of specified shape id.
+  schema:
+    type: string
+    example: '?shape_count[5d0c94b6ce73d38532000002]=4&shape_count[5e0c14a6ce73d385320923845]=0'
+
+DielineSearchShapeId:
+  name: shape_id
+  in: query
+  requried: false
+  description: Search dielines by their shape which references a persisted path object.
+  schema:
+    style: deepObject
+    type: string
+    example: '?shape_id=5d0c94b6ce73d38532000002'

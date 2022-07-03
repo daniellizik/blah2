@@ -1,0 +1,73 @@
+/dieline:
+  post:
+    summary: Create a dieline
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Dieline'
+    responses:
+      '200':
+        description: Responds with created dieline
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dieline'
+
+'/dieline/{dieline_id}':
+  get:
+    summary: Get one dieline by id
+    parameters:
+      - $ref: '#/components/parameters/DielineId'
+    responses:
+      '200':
+        description: Responds with latest version of the specified dieline
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dieline'
+      '404':
+        description: Dieline could not be found
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorResourceNotFound'
+
+  put:
+    summary: Update a dieline by id
+    parameters:
+      - $ref: '#/components/parameters/DielineId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DielineUpdateInput'
+    responses:
+      '200':
+        description: Update success
+
+  delete:
+    summary: Delete a dieline by id
+    parameters:
+      - $ref: '#/components/parameters/DielineId'
+    responses:
+      '200':
+        description: Delete success
+
+'/dieline/{dieline_id}/versions':
+  get:
+    summary: Get versions of a dieline.
+    parameters:
+      - $ref: '#/components/parameters/DielineId'
+      - $ref: '#/components/parameters/Order'
+      - $ref: '#/components/parameters/PaginationOffset'
+      - $ref: '#/components/parameters/PaginationLimit'
+    responses:
+      '200':
+        description: Responds with paginated list of dieline versions.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DielineVersions'

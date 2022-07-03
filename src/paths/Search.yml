@@ -1,0 +1,16 @@
+'/dieline/search':
+  get:
+    summary: Get filtered list of dielines by search parameters.
+    parameters:
+      - $ref: '#/components/parameters/DielineSearchName'
+      - $ref: '#/components/parameters/DielineSearchShapeCount'
+      - $ref: '#/components/parameters/DielineSearchShapeId'
+      - $ref: '#/components/parameters/PaginationOffset'
+      - $ref: '#/components/parameters/PaginationLimit'
+    responses:
+      '200':
+        description: Responds with paginated list of dieline versions.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DielineVersions'

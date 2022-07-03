@@ -1,0 +1,6 @@
+DielineUpdateInput:
+  properties:
+    is_current:
+      type: boolean
+      example: true
+      description: retores the given version of the dieline as the latest (current) version.

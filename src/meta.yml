@@ -1,0 +1,8 @@
+openapi: 3.0.0
+info:
+  version: 3.57.0
+  title: Dieline API
+  description: dieline
+externalDocs:
+  description: dieline
+  url: 'https://daniellizik.github.io/blah2'

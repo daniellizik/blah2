@@ -1,0 +1,6 @@
+ErrorResourceNotFound:
+  properties:
+    errors:
+      type: array
+      example:
+        - '{Model} was not found'

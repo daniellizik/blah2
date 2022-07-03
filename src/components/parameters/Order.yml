@@ -1,0 +1,10 @@
+Order:
+  name: order
+  in: query
+  required: false
+  description: Orders version history by ascending or descending. If ascending, the first item in the response array will be the first version of the dieline. If descending, the first item in the array will be the most recent version.
+  schema:
+    type: string
+    enum:
+      - ascending
+      - descending

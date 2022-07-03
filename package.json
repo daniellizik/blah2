@@ -1,0 +1,19 @@
+{
+  "name": "blah-api",
+  "version": "0.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node ./scripts/build && npm run validate",
+    "seed": "node ./scripts/seed",
+    "validate": "swagger-cli validate ./docs/spec.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apidevtools/swagger-cli": "4.0.4",
+    "axios": "0.26.0",
+    "js-yaml": "3.13.1",
+    "require-yml": "2.0.0"
+  }
+}

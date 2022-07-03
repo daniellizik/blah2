@@ -1,0 +1,22 @@
+Dieline:
+  properties:
+    id:
+      description: The id of the versioned dieline instance
+      type: string
+      example: 5d0c94b6ce73d38532000002
+    version:
+      description: The version of the dieline
+      type: number
+      example: 2
+    is_current:
+      description: Whether the versioned instance of the dieline is its latest version
+      type: boolean
+      example: true
+
+DielineVersions:
+  properties:
+    versions:
+      type: array
+      description: List of versioned dielines
+      items:
+        $ref: '#/components/schemas/Dieline'

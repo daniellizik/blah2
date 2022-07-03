@@ -1,0 +1,310 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "3.57.0",
+    "title": "Dieline API",
+    "description": "dieline"
+  },
+  "externalDocs": {
+    "description": "dieline",
+    "url": "https://daniellizik.github.io/blah2"
+  },
+  "paths": {
+    "/dieline": {
+      "post": {
+        "summary": "Create a dieline",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Dieline"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Responds with created dieline",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dieline"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dieline/{dieline_id}": {
+      "get": {
+        "summary": "Get one dieline by id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/DielineId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responds with latest version of the specified dieline",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dieline"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dieline could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResourceNotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a dieline by id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/DielineId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DielineUpdateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update success"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a dieline by id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/DielineId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete success"
+          }
+        }
+      }
+    },
+    "/dieline/{dieline_id}/versions": {
+      "get": {
+        "summary": "Get versions of a dieline.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/DielineId"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/PaginationOffset"
+          },
+          {
+            "$ref": "#/components/parameters/PaginationLimit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responds with paginated list of dieline versions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DielineVersions"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dieline/search": {
+      "get": {
+        "summary": "Get filtered list of dielines by search parameters.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/DielineSearchName"
+          },
+          {
+            "$ref": "#/components/parameters/DielineSearchShapeCount"
+          },
+          {
+            "$ref": "#/components/parameters/DielineSearchShapeId"
+          },
+          {
+            "$ref": "#/components/parameters/PaginationOffset"
+          },
+          {
+            "$ref": "#/components/parameters/PaginationLimit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responds with paginated list of dieline versions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DielineVersions"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "DielineId": {
+        "name": "dieline_id",
+        "in": "path",
+        "required": true,
+        "description": "The id of the dieline",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "DielineVersion": {
+        "name": "dieline_version",
+        "in": "query",
+        "requried": false,
+        "description": "The version of the dieline. If ommited, the current version is returned.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Order": {
+        "name": "order",
+        "in": "query",
+        "required": false,
+        "description": "Orders version history by ascending or descending. If ascending, the first item in the response array will be the first version of the dieline. If descending, the first item in the array will be the most recent version.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "ascending",
+            "descending"
+          ]
+        }
+      },
+      "PaginationOffset": {
+        "name": "offset",
+        "in": "query",
+        "required": false,
+        "description": "Pagination offset of dieline version history. If not supplied, assume offset is 0.",
+        "schema": {
+          "type": "number",
+          "example": 50
+        }
+      },
+      "PaginationLimit": {
+        "name": "limit",
+        "in": "query",
+        "requried": false,
+        "description": "Pagination limit of dieline version history. If not supplied, use the server default.",
+        "schema": {
+          "type": "number",
+          "example": 50
+        }
+      },
+      "DielineSearchName": {
+        "name": "name",
+        "in": "query",
+        "required": false,
+        "description": "Search dielines by name.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "DielineSearchShapeCount": {
+        "name": "shape_count",
+        "in": "query",
+        "requried": false,
+        "description": "Search dielines by the occurances of specified shape id.",
+        "schema": {
+          "type": "string",
+          "example": "?shape_count[5d0c94b6ce73d38532000002]=4&shape_count[5e0c14a6ce73d385320923845]=0"
+        }
+      },
+      "DielineSearchShapeId": {
+        "name": "shape_id",
+        "in": "query",
+        "requried": false,
+        "description": "Search dielines by their shape which references a persisted path object.",
+        "schema": {
+          "style": "deepObject",
+          "type": "string",
+          "example": "?shape_id=5d0c94b6ce73d38532000002"
+        }
+      }
+    },
+    "schemas": {
+      "Dieline": {
+        "properties": {
+          "id": {
+            "description": "The id of the versioned dieline instance",
+            "type": "string",
+            "example": "5d0c94b6ce73d38532000002"
+          },
+          "version": {
+            "description": "The version of the dieline",
+            "type": "number",
+            "example": 2
+          },
+          "is_current": {
+            "description": "Whether the versioned instance of the dieline is its latest version",
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "DielineVersions": {
+        "properties": {
+          "versions": {
+            "type": "array",
+            "description": "List of versioned dielines",
+            "items": {
+              "$ref": "#/components/schemas/Dieline"
+            }
+          }
+        }
+      },
+      "DielineUpdateInput": {
+        "properties": {
+          "is_current": {
+            "type": "boolean",
+            "example": true,
+            "description": "retores the given version of the dieline as the latest (current) version."
+          }
+        }
+      },
+      "ErrorResourceNotFound": {
+        "properties": {
+          "errors": {
+            "type": "array",
+            "example": [
+              "{Model} was not found"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

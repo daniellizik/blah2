@@ -1,0 +1,17 @@
+PaginationOffset:
+  name: offset
+  in: query
+  required: false
+  description: Pagination offset of dieline version history. If not supplied, assume offset is 0.
+  schema:
+    type: number
+    example: 50
+
+PaginationLimit:
+  name: limit
+  in: query
+  requried: false
+  description: Pagination limit of dieline version history. If not supplied, use the server default.
+  schema:
+    type: number
+    example: 50
